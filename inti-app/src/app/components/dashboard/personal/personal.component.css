@@ -2,3 +2,21 @@ table{
     width: 100%;
     margin-top: 20px;
 }
+
+th{
+    width: 10%;
+}
+
+mat-icon{
+    width: 30%;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 10%;
+    margin-top: 15px;
+  }

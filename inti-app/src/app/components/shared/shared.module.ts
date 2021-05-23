@@ -16,6 +16,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -32,7 +35,10 @@ import {MatTableModule} from '@angular/material/table';
     MatTabsModule,
     MatIconModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule
   ],exports: [
     MatSliderModule,
     MatFormFieldModule,
@@ -45,7 +51,10 @@ import {MatTableModule} from '@angular/material/table';
     MatTabsModule,
     MatIconModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class SharedModule { }
