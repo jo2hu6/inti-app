@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   error(){
-    this._snackBar.open('Usuario o contraseña ingresados son inválidos','',{
+    this._snackBar.open('Usuario y/o contraseña ingresados son inválidos','',{
       duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
