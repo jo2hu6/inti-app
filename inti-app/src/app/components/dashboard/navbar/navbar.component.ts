@@ -1,3 +1,5 @@
+import { Menu } from './../../../interfaces/menu';
+import { MenuService } from './../../../services/menu.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  menu: Menu[] = [];
+
+  constructor(private _menuService: MenuService) { }
 
   ngOnInit(): void {
+    this.cargarMenu();
+  }
+
+  cargarMenu(){
+    this._menuService.getMenu().subscribe(data => {
+      this.menu = data;
+    })
   }
 
 }

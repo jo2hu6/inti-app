@@ -1,3 +1,5 @@
+import { Empleado } from './../../../interfaces/empleado';
+import { PersonalService } from '../../../services/personal.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalComponent implements OnInit {
 
-  constructor() { }
+  data:any;
+  Employees: any = [];
+  displayedColumns: string[] = ['id', 'nombre', 'apellido', 'puesto', 'telefono', 'dni', 'direccion'];
+  constructor(private employeeService: PersonalService) { }
 
   ngOnInit(): void {
+    this.employeeService.getData().subscribe((res) => {
+      console.log(res);
+      this.Employees = res;
+    });
   }
 
 }

@@ -1,0 +1,18 @@
+[
+    {
+        "nombre": "Inicio",
+        "redirect": "/dashboard"
+    },
+    {
+        "nombre": "Personal",
+        "redirect": "/dashboard/personal"
+    },
+    {
+        "nombre": "Productos",
+        "redirect": "/dashboard/productos"
+    },
+    {
+        "nombre": "Ventas",
+        "redirect": "/dashboard/ventas"
+    }
+]

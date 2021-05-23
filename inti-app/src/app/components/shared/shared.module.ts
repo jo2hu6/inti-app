@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 //MODULOS
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 //ANGULAR MATERIAL
 import { MatSliderModule } from '@angular/material/slider';
@@ -14,6 +15,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -28,7 +30,9 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatToolbarModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
+    MatTableModule
   ],exports: [
     MatSliderModule,
     MatFormFieldModule,
@@ -39,7 +43,9 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MatToolbarModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
+    MatTableModule
   ]
 })
 export class SharedModule { }
