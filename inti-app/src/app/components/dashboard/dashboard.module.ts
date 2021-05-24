@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PersonalComponent } from './personal/personal.component';
 import { ProductosComponent } from './productos/productos.component';
 import { VentasComponent } from './ventas/ventas.component';
+import { NewPersonalComponent } from './personal/new-personal/new-personal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { VentasComponent } from './ventas/ventas.component';
     NavbarComponent,
     PersonalComponent,
     ProductosComponent,
-    VentasComponent
+    VentasComponent,
+    NewPersonalComponent
   ],
   imports: [
     CommonModule,

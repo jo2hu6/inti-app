@@ -1,7 +1,6 @@
 <div class="container">
     <mat-toolbar>
         <span>Personal</span>
-        
     </mat-toolbar>
 
     <div *ngIf="listPersonal.length > 0">
@@ -15,7 +14,7 @@
 
       <div style="text-align: right; margin-top:-50px">
         <div class="example-spacer"></div>
-        <button mat-raised-button color="primary">Agregar</button>
+        <button mat-raised-button color="primary" (click)="addPersonal()">Agregar</button>
       </div>
 
       <div class="mat-elevation-z8">
@@ -41,7 +40,7 @@
         
           <!-- puesto Column -->
           <ng-container matColumnDef="puesto">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Puesto </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
             <td mat-cell *matCellDef="let element"> {{element.job_title}} </td>
           </ng-container>
   
@@ -86,6 +85,6 @@
       </div>
     </div>
 
-    <h1 class="emptyIn" *ngIf="listPersonal == 0">No existe ningún registro!</h1>
+    <h1 class="emptyIn" *ngIf="listPersonal.length == 0">No existe ningún registro!</h1>
 
 </div>

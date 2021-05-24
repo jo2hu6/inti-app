@@ -1,0 +1,62 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+      <div class="container">
+        <form [formGroup]="personalForm" (ngSubmit)="addNewPersonal()">
+          <mat-toolbar style="margin-bottom: 30px;">
+            <span class="example-spacer"></span>
+            <h2><strong>Agrega Personal</strong></h2>
+            <span class="example-spacer"></span>
+        </mat-toolbar>
+          <div style="text-align:center">
+            <div>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Nombres</mat-label>
+                <input matInput placeholder="Escribe el nombre" formControlName="firstname">
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Apellidos</mat-label>
+                <input matInput placeholder="Escribe el apellido" formControlName="lastname">
+              </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Cargo</mat-label>
+                  <input matInput placeholder="Escribe el cargo" formControlName="lastname">
+                </mat-form-field>
+            </div>
+      
+            <div>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>N° Celular</mat-label>
+                <input matInput placeholder="Escribe N° de celular" formControlName="phone">
+              </mat-form-field>
+            </div>
+    
+            <div>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>DNI</mat-label>
+                <input matInput placeholder="Escribe el apellido" formControlName="dni">
+              </mat-form-field>
+            </div>
+
+            <div>
+              <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Escribe el apellido" formControlName="address">
+              </mat-form-field>
+          </div>
+      
+            <div id="buttons">
+              <button mat-raised-button color="primary" style="margin:20px" type="submit">Agregar</button>
+              <button mat-raised-button color="warn" data-dismiss="modal" (click)="cancel()">Cancelar</button>
+            </div>
+          </div>
+            
+        </form>
+      </div>
+    </div>
+  </div>
