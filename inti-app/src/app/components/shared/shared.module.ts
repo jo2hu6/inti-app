@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 //MODULOS
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 //ANGULAR MATERIAL
@@ -38,7 +38,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatTableModule,
     MatTooltipModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule
   ],exports: [
     MatSliderModule,
     MatFormFieldModule,
@@ -54,7 +55,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatTableModule,
     MatTooltipModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    FormsModule
   ]
 })
 export class SharedModule { }

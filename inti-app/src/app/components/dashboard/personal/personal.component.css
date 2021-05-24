@@ -19,4 +19,12 @@ mat-icon{
     font-size: 14px;
     width: 10%;
     margin-top: 15px;
-  }
+}
+
+.emptyIn{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+}

@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-personal',
@@ -12,28 +13,51 @@ import { MatSort } from '@angular/material/sort';
 })
 export class PersonalComponent implements OnInit {
 
-  dataSource:any;
+  dataSource: any;
+  searchKey: any;
+  listPersonal:any;
   displayedColumns: string[] = ['id', 'nombre', 'apellido', 'puesto', 'telefono', 'dni', 'direccion','acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private personalService: PersonalService) { }
+  constructor(private personalService: PersonalService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    
-    this.personalService.getData().subscribe((res) => {
+    this.cargarPersonal();
+  }
+
+  cargarPersonal(){
+    this.personalService.getPersonal().subscribe((res) => {
       this.dataSource = res;
+      this.listPersonal = res;
       this.dataSource = new MatTableDataSource(this.dataSource);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    })
-
+    });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  deletePersonal(id:any, i:any){
+    console.log(id);
+    if(window.confirm('Seguro quiere eliminar?')){
+      this.personalService.deletePersonal(id).subscribe((res) => {
+        this.cargarPersonal();
+      })
+    }
+    this._snackBar.open('Eliminado con éxito!','',{
+      duration: 1500,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
+
+  onSearchClear(){
+    this.searchKey = "";
+    this.applyFilter();
+  }
+
+  applyFilter() {
+    this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
 }

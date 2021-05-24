@@ -1,78 +1,91 @@
 <div class="container">
     <mat-toolbar>
         <span>Personal</span>
+        
     </mat-toolbar>
 
-    <mat-form-field>
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
-    </mat-form-field>
+    <div *ngIf="listPersonal.length > 0">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter()" [(ngModel)]="searchKey" placeholder="Busca algo..." #input autocomplete="off">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey" (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
 
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
-      
-        <!-- id Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
-      
-        <!-- nombre Column -->
-        <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
-        </ng-container>
-      
-        <!-- apellido Column -->
-        <ng-container matColumnDef="apellido">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-          <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
-        </ng-container>
-      
-        <!-- puesto Column -->
-        <ng-container matColumnDef="puesto">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Puesto </th>
-          <td mat-cell *matCellDef="let element"> {{element.job_title}} </td>
-        </ng-container>
+      <div style="text-align: right; margin-top:-50px">
+        <div class="example-spacer"></div>
+        <button mat-raised-button color="primary">Agregar</button>
+      </div>
 
-        <!-- telefono Column -->
-        <ng-container matColumnDef="telefono">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
-            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-        </ng-container>
-
-        <!-- dni Column -->
-        <ng-container matColumnDef="dni">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
-            <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
-        </ng-container>
-
-        <!-- direccion Column -->
-        <ng-container matColumnDef="direccion">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
-            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-        </ng-container>
-
-        <!-- acciones Column -->
-        <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element" style="text-align:right;"> 
-            <a class="pointer" style="color: #1f516f" matTooltip="Ver Detalle">
-              <mat-icon>read_more</mat-icon>
-            </a>
-            <a class="pointer" style="color: #1f516f;" matTooltip="Editar">
-              <mat-icon>edit</mat-icon>
-            </a>
-            <a class="pointer" style="color: #e15639" matTooltip="Eliminar">
-              <mat-icon>delete</mat-icon>
-            </a>
-          </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+        
+          <!-- id Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+        
+          <!-- nombre Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+          </ng-container>
+        
+          <!-- apellido Column -->
+          <ng-container matColumnDef="apellido">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+          </ng-container>
+        
+          <!-- puesto Column -->
+          <ng-container matColumnDef="puesto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Puesto </th>
+            <td mat-cell *matCellDef="let element"> {{element.job_title}} </td>
+          </ng-container>
+  
+          <!-- telefono Column -->
+          <ng-container matColumnDef="telefono">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+              <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+          </ng-container>
+  
+          <!-- dni Column -->
+          <ng-container matColumnDef="dni">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+              <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+          </ng-container>
+  
+          <!-- direccion Column -->
+          <ng-container matColumnDef="direccion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+              <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+          </ng-container>
+  
+          <!-- acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" style="text-align:right;"> 
+              <a class="pointer" style="color: #1f516f" matTooltip="Ver Detalle">
+                <mat-icon>read_more</mat-icon>
+              </a>
+              <a class="pointer" style="color: #1f516f;" matTooltip="Editar">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a class="pointer" style="color: #e15639" matTooltip="Eliminar" (click)="deletePersonal(element.id, element)">
+                <mat-icon>delete</mat-icon>
+              </a>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
     </div>
+
+    <h1 class="emptyIn" *ngIf="listPersonal == 0">No existe ningún registro!</h1>
 
 </div>
