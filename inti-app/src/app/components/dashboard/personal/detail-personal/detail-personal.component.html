@@ -1,0 +1,39 @@
+
+<form [formGroup]="personalForm" *ngFor="let i of personalList" action="">
+
+    <mat-toolbar style="margin-bottom: 5px;">
+        <span class="example-spacer"></span>
+        <h2><strong>Detalle Personal</strong></h2>
+        <span class="example-spacer"></span>
+    </mat-toolbar>
+
+    <mat-list>
+        <mat-list-item><strong>Nombres:</strong></mat-list-item>
+        <h3 class="interDetail"> {{i.firstname}} </h3>
+        <mat-divider ></mat-divider>
+
+        <mat-list-item><strong>Apellidos:</strong></mat-list-item>
+        <h3 class="interDetail"> {{i.lastname}} </h3>
+        <mat-divider></mat-divider>
+
+        <mat-list-item><strong>Cargo:</strong></mat-list-item>
+        <h3 class="interDetail"> {{i.job_title}} </h3>
+        <mat-divider></mat-divider>
+
+        <mat-list-item><strong>N° celular:</strong></mat-list-item>
+        <h3 class="interDetail"> {{i.phone}} </h3>
+        <mat-divider></mat-divider>
+        
+        <mat-list-item><strong>DNI:</strong></mat-list-item>
+        <h3 class="interDetail"> {{i.dni}} </h3>
+        <mat-divider></mat-divider>
+
+        <mat-list-item><strong>Dirección:</strong></mat-list-item>
+        <h3 class="interDetail"> {{i.address}} </h3>
+    </mat-list>
+
+    <div style="text-align: center;margin-top: 30px;">
+        <button mat-raised-button color="primary" (click)="cancel()">Aceptar</button>
+    </div>
+
+</form>

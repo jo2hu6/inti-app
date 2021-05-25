@@ -1,3 +1,4 @@
+import { DetailPersonalComponent } from './detail-personal/detail-personal.component';
 import { EditPersonalComponent } from './edit-personal/edit-personal.component';
 import { NewPersonalComponent } from './new-personal/new-personal.component';
 import { Empleado } from './../../../interfaces/empleado';
@@ -57,18 +58,31 @@ export class PersonalComponent implements OnInit, AfterViewInit {
   deletePersonal(id: any, i: any) {
     Swal.fire({
       title: 'Desea eliminar?',
+      //text: 'You will not be able to recover this imaginary file!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si, deseo eliminar',
-      cancelButtonText: 'No, regresar',
+      confirmButtonColor:"#3085d6",
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Eliminado!', 'Eliminado con éxito!.', 'success');
+        //Swal.fire('Deleted!','Your imaginary file has been deleted.', 'success');
+        console.log(id);
+
         this.personalService.deletePersonalService(id).subscribe((res) => {
-        this.cargarPersonal();
-      });
-      } else 
-        if (result.dismiss === Swal.DismissReason.cancel) {
+          this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
+        },
+        (err) => {
+          console.log(err);
+        });
+        this._serviceEdit.set({});
+        this._snackBar.open('Eliminado con éxito!','',{
+          duration: 1500,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom'
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        //Swal.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
       }
     });
   }
@@ -92,6 +106,16 @@ export class PersonalComponent implements OnInit, AfterViewInit {
     this._serviceEdit.set(i)
     this.dialog.open(EditPersonalComponent, dialogConfig);
     this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
+  }
+
+  detailPersonal(id:any, i:any){
+    //console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "28%";
+    this._serviceEdit.set(i)
+    this.dialog.open(DetailPersonalComponent, dialogConfig);
   }
 
   onSearchClear(){

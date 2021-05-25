@@ -11,6 +11,7 @@ import { ProductosComponent } from './productos/productos.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { NewPersonalComponent } from './personal/new-personal/new-personal.component';
 import { EditPersonalComponent } from './personal/edit-personal/edit-personal.component';
+import { DetailPersonalComponent } from './personal/detail-personal/detail-personal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EditPersonalComponent } from './personal/edit-personal/edit-personal.co
     ProductosComponent,
     VentasComponent,
     NewPersonalComponent,
-    EditPersonalComponent
+    EditPersonalComponent,
+    DetailPersonalComponent
   ],
   imports: [
     CommonModule,

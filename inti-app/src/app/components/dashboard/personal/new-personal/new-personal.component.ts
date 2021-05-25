@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PersonalService } from './../../../../services/personal.service';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -37,12 +37,12 @@ export class NewPersonalComponent implements OnInit {
     public formBuilder: FormBuilder,
     private dialog: MatDialog) {
       this.personalForm = this.formBuilder.group({
-        firstname: [''],
-        lastname: [''],
-        job_title: [''],
-        phone: [''],
-        dni: [''],
-        address: ['']
+        firstname: ['', Validators.required],
+        lastname: ['',Validators.required],
+        job_title: ['',Validators.required],
+        phone: ['',Validators.required],
+        dni: ['',Validators.required],
+        address: ['',Validators.required]
       });
     }
 

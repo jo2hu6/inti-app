@@ -1,6 +1,9 @@
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Empleado } from 'src/app/interfaces/empleado';
+import { ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -8,19 +11,19 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import { Empleado } from 'src/app/interfaces/empleado';
 import { EditPersonalService } from 'src/app/services/configEdit/editPersonal.service';
 import { PersonalService } from 'src/app/services/personal.service';
 import { PersonalComponent } from '../personal.component';
 
 @Component({
-  selector: 'app-edit-personal',
-  templateUrl: './edit-personal.component.html',
-  styleUrls: ['./edit-personal.component.css']
+  selector: 'app-detail-personal',
+  templateUrl: './detail-personal.component.html',
+  styleUrls: ['./detail-personal.component.css']
 })
-export class EditPersonalComponent implements OnInit {
+export class DetailPersonalComponent implements OnInit {
 
   personalForm: FormGroup;
+  personalList: any [] = [];
   dataSource: any;
   id!: number;
   getId: any;
@@ -38,8 +41,8 @@ export class EditPersonalComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public formBuilder: FormBuilder,
     private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute,
     private _serviceEdit: EditPersonalService) {
+      
       this.personalService.getPersonalIdService(this._serviceEdit.get().id).subscribe((res) => {
         this.personalForm.setValue({
           firstname: res.firstname,
@@ -49,7 +52,11 @@ export class EditPersonalComponent implements OnInit {
           dni: res.dni,
           address: res.address,
         });
+
+        this.personalList = [res];
+
       });
+
       this.personalForm = this.formBuilder.group({
         firstname: [''],
         lastname: [''],
@@ -58,6 +65,7 @@ export class EditPersonalComponent implements OnInit {
         dni: [''],
         address: ['']
       });
+      
     }
 
   ngOnInit(): void {
@@ -75,20 +83,8 @@ export class EditPersonalComponent implements OnInit {
     }));
   }
 
-  editNewPersonal():any{
-    console.log(this.personalForm.value);
-    this.personalService.editPersonalService(this._serviceEdit.get().id, this.personalForm.value).subscribe(() => {
-      console.log('La dataaaa ha llegaoooo');
-    },
-    (err) => {
-      console.log(err);
-    })
+  deltailPersonalSelect():any{
     this._serviceEdit.set({});
-    this._snackBar.open('Actualizado con éxito!','',{
-      duration: 1500,
-      horizontalPosition: 'right',
-      verticalPosition: 'bottom'
-    });
     this.dialogRef.close();
   }
 

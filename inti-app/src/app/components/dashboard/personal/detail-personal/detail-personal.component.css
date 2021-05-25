@@ -1,0 +1,18 @@
+h3{
+    text-align: center;
+    margin-top: -15px;
+}
+
+strong{
+    font-size: large;
+    padding: 30px;
+}
+
+mat-divider{
+    margin-right: 15%;
+    margin-left: 9%;
+}
+
+button{
+    color:white;
+}
