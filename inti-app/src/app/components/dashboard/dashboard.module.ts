@@ -10,6 +10,7 @@ import { PersonalComponent } from './personal/personal.component';
 import { ProductosComponent } from './productos/productos.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { NewPersonalComponent } from './personal/new-personal/new-personal.component';
+import { EditPersonalComponent } from './personal/edit-personal/edit-personal.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NewPersonalComponent } from './personal/new-personal/new-personal.compo
     PersonalComponent,
     ProductosComponent,
     VentasComponent,
-    NewPersonalComponent
+    NewPersonalComponent,
+    EditPersonalComponent
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { EditPersonalComponent } from './edit-personal/edit-personal.component';
 import { NewPersonalComponent } from './new-personal/new-personal.component';
 import { Empleado } from './../../../interfaces/empleado';
 import { PersonalService } from '../../../services/personal.service';
@@ -9,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { EditPersonalService } from 'src/app/services/configEdit/editPersonal.service';
 
 @Component({
   selector: 'app-personal',
@@ -26,7 +29,7 @@ export class PersonalComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private personalService: PersonalService, private _snackBar: MatSnackBar, private dialog: MatDialog) { 
+  constructor(private personalService: PersonalService, private _snackBar: MatSnackBar, private dialog: MatDialog, private _serviceEdit: EditPersonalService) { 
     
   }
 
@@ -41,6 +44,7 @@ export class PersonalComponent implements OnInit, AfterViewInit {
   cargarPersonal(){
     this.listPersonal$ = this.personalService.getPersonalService().pipe(tap(response => {
       this.dataSource = new MatTableDataSource(response);
+      console.log(this.dataSource);
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -48,25 +52,24 @@ export class PersonalComponent implements OnInit, AfterViewInit {
       
       this.pageLength = response.length;
     }));
-    /*this.personalService.getPersonalService().subscribe((res:any) => {
-      this.dataSource = res;
-      this.listPersonal = res;
-      this.dataSource = new MatTableDataSource(res);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });*/
   }
 
-  deletePersonal(id:any, i:any){
-    if(window.confirm('Seguro quiere eliminar?')){
-      this.personalService.deletePersonalService(id).subscribe((res) => {
+  deletePersonal(id: any, i: any) {
+    Swal.fire({
+      title: 'Desea eliminar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, deseo eliminar',
+      cancelButtonText: 'No, regresar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Eliminado!', 'Eliminado con éxito!.', 'success');
+        this.personalService.deletePersonalService(id).subscribe((res) => {
         this.cargarPersonal();
-      })
-    }
-    this._snackBar.open('Eliminado con éxito!','',{
-      duration: 1500,
-      horizontalPosition: 'right',
-      verticalPosition: 'bottom'
+      });
+      } else 
+        if (result.dismiss === Swal.DismissReason.cancel) {
+      }
     });
   }
 
@@ -76,6 +79,18 @@ export class PersonalComponent implements OnInit, AfterViewInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "30%";
     this.dialog.open(NewPersonalComponent, dialogConfig);
+    this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
+  }
+
+  editPersonal(id: any, i: any){
+    console.log(id);
+    console.log(i);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "30%";
+    this._serviceEdit.set(i)
+    this.dialog.open(EditPersonalComponent, dialogConfig);
     this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
   }
 

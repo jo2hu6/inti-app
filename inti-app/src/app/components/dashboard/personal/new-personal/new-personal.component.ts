@@ -9,7 +9,9 @@ import { Empleado } from 'src/app/interfaces/empleado';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-new-personal',
@@ -20,7 +22,8 @@ export class NewPersonalComponent implements OnInit {
 
   personalForm: FormGroup;
   dataSource: any;
-  listPersonal: Empleado[] = [];
+  pageLength = 0;
+  listPersonal$: Observable<any> = of(null);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -47,20 +50,21 @@ export class NewPersonalComponent implements OnInit {
   }
 
   cargarPersonal(){
-    this.personalService.getPersonalService().subscribe((res) => {
-      this.dataSource = res;
-      this.listPersonal = this.dataSource;
-      this.dataSource = new MatTableDataSource(this.dataSource);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    this.listPersonal$ = this.personalService.getPersonalService().pipe(tap(response => {
+      this.dataSource = new MatTableDataSource(response);
+      console.log(this.dataSource);
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+      
+      this.pageLength = response.length;
+    }));
   }
 
   addNewPersonal():any{
     this.personalService.addPersonalService(this.personalForm.value).subscribe(() => {
       console.log('La dataaaa ha llegaoooo');
-      this.ngZone.run(() => this.router.navigateByUrl('/dashboard/personal'));
-      this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
     },
     (err) => {
       console.log(err);
