@@ -2,13 +2,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { PersonalService } from './../../../../services/personal.service';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PersonalComponent } from '../personal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Empleado } from 'src/app/interfaces/empleado';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-personal',
@@ -30,7 +31,8 @@ export class NewPersonalComponent implements OnInit {
     private router: Router,
     public dialogRef: MatDialogRef<PersonalComponent>,
     private _snackBar: MatSnackBar,
-    public formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder,
+    private dialog: MatDialog) {
       this.personalForm = this.formBuilder.group({
         firstname: [''],
         lastname: [''],
@@ -58,7 +60,7 @@ export class NewPersonalComponent implements OnInit {
     this.personalService.addPersonalService(this.personalForm.value).subscribe(() => {
       console.log('La dataaaa ha llegaoooo');
       this.ngZone.run(() => this.router.navigateByUrl('/dashboard/personal'));
-      this.cargarPersonal();
+      this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
     },
     (err) => {
       console.log(err);
@@ -68,6 +70,7 @@ export class NewPersonalComponent implements OnInit {
       horizontalPosition: 'right',
       verticalPosition: 'bottom'
     });
+    this.dialogRef.close();
   }
 
   cancel(){

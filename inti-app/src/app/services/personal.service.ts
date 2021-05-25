@@ -14,7 +14,7 @@ export class PersonalService {
 
   constructor(private http: HttpClient) { }
 
-  getPersonalService(){
+  getPersonalService(): Observable<any> {
     return this.http.get(`${this.REST_API}/employee`);
   }
 
