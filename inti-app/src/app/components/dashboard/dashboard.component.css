@@ -1,0 +1,22 @@
+mat-sidenav-container{
+    height: 100%;
+}
+
+*{
+    transition: all .35s linear;
+}
+
+.chevron-button{
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+    right: 0;
+    float: right;
+}
+
+.chevron-button.rotated{
+    transform: rotate(180deg);
+}
+
+.sidenav-button{
+
+}

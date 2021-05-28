@@ -1,38 +1,39 @@
 
 <form [formGroup]="personalForm" *ngFor="let i of personalList" action="">
 
-    <mat-toolbar style="margin-bottom: 5px;">
+    <mat-toolbar>
         <span class="example-spacer"></span>
         <h2><strong>Detalle Personal</strong></h2>
         <span class="example-spacer"></span>
     </mat-toolbar>
 
     <mat-list>
-        <mat-list-item><strong>Nombres:</strong></mat-list-item>
+
+        <span>Nombres:</span>
         <h3 class="interDetail"> {{i.firstname}} </h3>
         <mat-divider ></mat-divider>
 
-        <mat-list-item><strong>Apellidos:</strong></mat-list-item>
+        <span>Apellidos:</span>
         <h3 class="interDetail"> {{i.lastname}} </h3>
         <mat-divider></mat-divider>
 
-        <mat-list-item><strong>Cargo:</strong></mat-list-item>
+        <span>Cargo:</span>
         <h3 class="interDetail"> {{i.job_title}} </h3>
         <mat-divider></mat-divider>
 
-        <mat-list-item><strong>N° celular:</strong></mat-list-item>
+        <span>N° celular:</span>
         <h3 class="interDetail"> {{i.phone}} </h3>
         <mat-divider></mat-divider>
         
-        <mat-list-item><strong>DNI:</strong></mat-list-item>
+        <span>DNI:</span>
         <h3 class="interDetail"> {{i.dni}} </h3>
         <mat-divider></mat-divider>
 
-        <mat-list-item><strong>Dirección:</strong></mat-list-item>
+        <span>Dirección:</span>
         <h3 class="interDetail"> {{i.address}} </h3>
     </mat-list>
 
-    <div style="text-align: center;margin-top: 30px;">
+    <div class="btn">
         <button mat-raised-button color="primary" (click)="cancel()">Aceptar</button>
     </div>
 

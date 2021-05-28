@@ -6,7 +6,7 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 //ANGULAR MATERIAL
-import { MatSliderModule } from '@angular/material/slider';
+import {MatSliderModule} from '@angular/material/slider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -22,6 +22,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -45,7 +46,8 @@ import {MatListModule} from '@angular/material/list';
     FormsModule,
     MatDialogModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatSidenavModule
   ],exports: [
     MatSliderModule,
     MatFormFieldModule,
@@ -65,7 +67,8 @@ import {MatListModule} from '@angular/material/list';
     FormsModule,
     MatDialogModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatSidenavModule
   ]
 })
 export class SharedModule { }
