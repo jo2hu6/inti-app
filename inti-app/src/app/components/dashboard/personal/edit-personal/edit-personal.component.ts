@@ -1,14 +1,10 @@
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
-import { Empleado } from 'src/app/interfaces/empleado';
 import { EditPersonalService } from 'src/app/services/configEdit/editPersonal.service';
 import { PersonalService } from 'src/app/services/personal.service';
 import { PersonalComponent } from '../personal.component';
@@ -32,13 +28,9 @@ export class EditPersonalComponent implements OnInit {
 
   constructor(
     private personalService:PersonalService,
-    private ngZone: NgZone,
-    private router: Router,
     public dialogRef: MatDialogRef<PersonalComponent>,
     private _snackBar: MatSnackBar,
     public formBuilder: FormBuilder,
-    private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute,
     private _serviceEdit: EditPersonalService) {
       this.personalService.getPersonalIdService(this._serviceEdit.get().id).subscribe((res) => {
         this.personalForm.setValue({
@@ -47,7 +39,7 @@ export class EditPersonalComponent implements OnInit {
           job_title: res.job_title,
           phone: res.phone,
           dni: res.dni,
-          address: res.address,
+          address: res.address
         });
       });
       this.personalForm = this.formBuilder.group({
@@ -61,18 +53,6 @@ export class EditPersonalComponent implements OnInit {
     }
 
   ngOnInit(): void {
-  }
-
-  cargarPersonal(){
-    this.listPersonal$ = this.personalService.getPersonalService().pipe(tap(response => {
-      this.dataSource = new MatTableDataSource(response);
-      setTimeout(() => {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
-      
-      this.pageLength = response.length;
-    }));
   }
 
   editNewPersonal():any{

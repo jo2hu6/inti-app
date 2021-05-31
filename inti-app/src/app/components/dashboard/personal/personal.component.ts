@@ -19,6 +19,7 @@ import { EditPersonalService } from 'src/app/services/configEdit/editPersonal.se
   templateUrl: './personal.component.html',
   styleUrls: ['./personal.component.css']
 })
+
 export class PersonalComponent implements OnInit, AfterViewInit {
 
   dataSource: any;
@@ -103,7 +104,7 @@ export class PersonalComponent implements OnInit, AfterViewInit {
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "30%";
-    this._serviceEdit.set(i)
+    this._serviceEdit.set(i);
     this.dialog.open(EditPersonalComponent, dialogConfig);
     this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarPersonal());
   }

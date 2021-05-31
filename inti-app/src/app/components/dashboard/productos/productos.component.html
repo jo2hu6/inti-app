@@ -1,5 +1,93 @@
 <div class="container">
     <mat-toolbar>
         <span>Productos</span>
+        <div class="example-spacer"></div>
+        <button mat-raised-button color="primary" (click)="addProducto()">Agregar</button>
     </mat-toolbar>
+
+    <div *ngIf="listProduct$ | async as listProduct">
+        <mat-form-field *ngIf="pageLength > 0">
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter()" [(ngModel)]="searchKey" placeholder="Busca algo..." #input autocomplete="off">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <div class="mat-elevation-z8" *ngIf="pageLength > 0">
+          <table mat-table [dataSource]="dataSource" matSort>
+          
+            <!-- id Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <!-- nombre Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.tittle}} </td>
+            </ng-container>
+          
+            <!-- supplier Column -->
+            <ng-container matColumnDef="supplier">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveedor </th>
+              <td mat-cell *matCellDef="let element"> {{element.id_supplier}} </td>
+            </ng-container>
+          
+            <!-- category Column -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+              <td mat-cell *matCellDef="let element"> {{element.id_category}} </td>
+            </ng-container>
+    
+            <!-- quantity Column -->
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad por Unidad </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantity_per_unit}} </td>
+            </ng-container>
+    
+            <!-- price Column -->
+            <ng-container matColumnDef="unite_price">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio unitario </th>
+                <td mat-cell *matCellDef="let element"> {{element.unite_price}} </td>
+            </ng-container>
+    
+            <!-- stock Column -->
+            <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock </th>
+                <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+            </ng-container>
+
+            <!-- descontinued Column -->
+            <ng-container matColumnDef="discontinued">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Descontinuado </th>
+                <td mat-cell *matCellDef="let element"> {{element.discontinued}} </td>
+            </ng-container>
+    
+            <!-- acciones Column -->
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element" style="text-align:right;"> 
+                <a class="pointer" style="color: #1f516f" matTooltip="Ver Detalle">
+                  <mat-icon>read_more</mat-icon>
+                </a>
+                <a class="pointer" style="color: #1f516f;" matTooltip="Editar" (click)="editProducto(element.id, element)">
+                  <mat-icon>edit</mat-icon>
+                </a>
+                <a class="pointer" style="color: #e15639" matTooltip="Eliminar" (click)="deleteProducto(element.id, element)">
+                  <mat-icon>delete</mat-icon>
+                </a>
+              </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [length]="pageLength" [pageSizeOptions]="[10,5]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+  
+      <h1 class="emptyIn" *ngIf="pageLength == 0">No existe ningún registro!</h1>  
+
 </div>

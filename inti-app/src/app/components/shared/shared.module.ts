@@ -23,6 +23,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -47,7 +48,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatDialogModule,
     MatDividerModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule
   ],exports: [
     MatSliderModule,
     MatFormFieldModule,
@@ -68,7 +70,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatDialogModule,
     MatDividerModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

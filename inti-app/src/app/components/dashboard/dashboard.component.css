@@ -1,9 +1,6 @@
 mat-sidenav-container{
     height: 100%;
-}
-
-*{
-    transition: all .35s linear;
+    transition: transform 0.3s, width 0.3s;
 }
 
 .chevron-button{

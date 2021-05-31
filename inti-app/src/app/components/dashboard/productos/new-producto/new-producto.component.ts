@@ -1,9 +1,9 @@
+import { ProductosComponent } from './../productos.component';
+import { ProductoService } from './../../../../services/producto.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PersonalService } from './../../../../services/personal.service';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { PersonalComponent } from '../personal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Empleado } from 'src/app/interfaces/empleado';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,13 +14,13 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-new-personal',
-  templateUrl: './new-personal.component.html',
-  styleUrls: ['./new-personal.component.css']
+  selector: 'app-new-producto',
+  templateUrl: './new-producto.component.html',
+  styleUrls: ['./new-producto.component.css']
 })
-export class NewPersonalComponent implements OnInit {
+export class NewProductoComponent implements OnInit {
 
-  personalForm: FormGroup;
+  productoForm: FormGroup;
   dataSource: any;
   pageLength = 0;
   listPersonal$: Observable<any> = of(null);
@@ -28,29 +28,29 @@ export class NewPersonalComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private personalService:PersonalService,
+  constructor(private productoService:ProductoService,
     private ngZone: NgZone,
     private router: Router,
-    public dialogRef: MatDialogRef<PersonalComponent>,
+    public dialogRef: MatDialogRef<ProductosComponent>,
     private _snackBar: MatSnackBar,
     public formBuilder: FormBuilder,
     private dialog: MatDialog) {
-      this.personalForm = this.formBuilder.group({
-        firstname: ['', Validators.required],
-        lastname: ['',Validators.required],
-        job_title: ['',Validators.required],
-        phone: ['',Validators.required],
-        dni: ['',Validators.required],
-        address: ['',Validators.required]
+      this.productoForm = this.formBuilder.group({
+        title: ['', Validators.required],
+        id_suplier: ['', Validators.required],
+        id_category: ['',Validators.required],
+        quantity_per_unit: ['',Validators.required],
+        unite_price: ['',Validators.required],
+        stock: ['',Validators.required],
+        discontinued: ['',Validators.required]
       });
-    }
+     }
 
   ngOnInit(): void {
   }
 
-  addNewPersonal():any{
-    this.personalService.addPersonalService(this.personalForm.value).subscribe(() => {
+  addNewProducto():any{
+    this.productoService.addProductoService(this.productoForm.value).subscribe(() => {
       console.log('La dataaaa ha llegaoooo');
     },
     (err) => {

@@ -2,24 +2,31 @@
 <mat-sidenav-container autosize>
     <mat-sidenav #sidenav mode="side" opened="true">
         <mat-nav-list>
+            
             <mat-list-item>
                 <mat-icon mat-list-icon class="chevron-button sidenav-button" (click)="isExpanded = !isExpanded" [ngClass]="{'rotated': isExpanded}">chevron_right</mat-icon>
+                <!-- <img src="../../../assets/img/logo-negro.png" width="20%" alt=""> -->
             </mat-list-item>
             <mat-list-item [routerLink]="'inicio'">
                 <mat-icon mat-list-icon>home</mat-icon>
                 <span *ngIf="isExpanded">Inicio</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="'personal'">
-                <mat-icon mat-list-icon>people</mat-icon>
-                <span *ngIf="isExpanded">Personal</span>
+            <mat-list-item [routerLink]="'ventas'">
+                <mat-icon mat-list-icon>sell</mat-icon>
+                <span *ngIf="isExpanded">Ventas</span>
             </mat-list-item>
             <mat-list-item [routerLink]="'productos'">
                 <mat-icon mat-list-icon>inventory</mat-icon>
                 <span *ngIf="isExpanded">Productos</span>
             </mat-list-item>
-            <mat-list-item [routerLink]="'ventas'">
-                <mat-icon mat-list-icon>sell</mat-icon>
-                <span *ngIf="isExpanded">Ventas</span>
+            <mat-list-item [routerLink]="'personal'">
+                <mat-icon mat-list-icon>people</mat-icon>
+                <span *ngIf="isExpanded">Personal</span>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="/logout" mat-icon-button aria-label="Example icon button with a home icon">
+                    <mat-icon>logout</mat-icon>
+                </button>
             </mat-list-item>
         </mat-nav-list>
     </mat-sidenav>
