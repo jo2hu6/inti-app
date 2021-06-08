@@ -6,6 +6,8 @@ import { Observable, of } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditProductoService } from 'src/app/services/configEdit/editProducto.service';
+import { SupplierService } from 'src/app/services/supplier.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-edit-producto',
@@ -19,6 +21,8 @@ export class EditProductoComponent implements OnInit {
   id!: number;
   getId: any;
   pageLength = 0;
+  suppliersList: any [] = [];
+  categoryList: any [] = [];
   listProducto$: Observable<any> = of(null);
 
   constructor(
@@ -26,8 +30,11 @@ export class EditProductoComponent implements OnInit {
     public dialogRef: MatDialogRef<ProductosComponent>,
     private _snackBar: MatSnackBar,
     public formBuilder: FormBuilder,
-    private _serviceEdit: EditProductoService) {
+    private _serviceEdit: EditProductoService,
+    private supplierService: SupplierService,
+    private categoryService: CategoryService) {
       this.productoService.getProductoIdService(this._serviceEdit.get().id).subscribe((res) => {
+        console.log(res)
         this.productoForm.setValue({
           title: res.tittle,
           id_suplier: res.id_supplier,
@@ -50,6 +57,8 @@ export class EditProductoComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.addSupplierToList();
+    this.addCategoryToList();
   }
 
   editNewProducto():any{
@@ -67,6 +76,18 @@ export class EditProductoComponent implements OnInit {
       verticalPosition: 'bottom'
     });
     this.dialogRef.close();
+  }
+
+  addSupplierToList():any{
+    this.supplierService.getSupplierService().subscribe((res:any) => {
+      this.suppliersList = res;
+    })
+  }
+
+  addCategoryToList():any{
+    this.categoryService.getCategoryService().subscribe((res:any) => {
+      this.categoryList = res;
+    })
   }
 
   cancel(){

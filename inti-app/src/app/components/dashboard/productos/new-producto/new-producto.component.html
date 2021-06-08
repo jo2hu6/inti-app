@@ -1,12 +1,14 @@
 <div class="row justify-content-center">
     <div>
       <div class="container">
-        <form [formGroup]="productoForm" (ngSubmit)="addNewProducto()">
+        <form [formGroup]="productoForm"  (ngSubmit)="addNewProducto()">
+          
           <mat-toolbar style="margin-bottom: 30px;">
             <span class="example-spacer"></span>
             <h2><strong>Agrega Producto</strong></h2>
             <span class="example-spacer"></span>
-        </mat-toolbar>
+          </mat-toolbar>
+
           <div style="text-align:center">
             <div>
               <mat-form-field style="width: 100%;">
@@ -18,14 +20,24 @@
             <div>
               <mat-form-field style="width: 100%;">
                 <mat-label>Proveedor</mat-label>
-                <input matInput placeholder="Escribe el proveedor" formControlName="id_suplier" autocomplete="off">
+                <mat-select formControlName="id_suplier">
+                  <mat-option *ngFor="let i of suppliersList" value="{{i.id}}">
+                    {{i.tittle}}
+                  </mat-option>
+                </mat-select>
+
               </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field style="width: 100%;">
                   <mat-label>Categoría</mat-label>
-                  <input matInput placeholder="Escribe la categoría" formControlName="id_category" autocomplete="off">
+                  <mat-select formControlName="id_category">
+                    <mat-option *ngFor="let i of categoryList" value="{{i.id}}">
+                      {{i.tittle}}
+                    </mat-option>
+                  </mat-select>
+
                 </mat-form-field>
             </div>
       
@@ -43,19 +55,21 @@
               </mat-form-field>
             </div>
 
-            <div>
-              <mat-form-field style="width: 100%;">
+            <div style="margin-bottom: 10px;">
+              <mat-form-field style="width: 100%; ">
                 <mat-label>Stock</mat-label>
                 <input matInput placeholder="Escribe el stock" formControlName="stock" autocomplete="off">
               </mat-form-field>
             </div>
-
+            
             <div>
-                <mat-form-field style="width: 100%;">
-                  <mat-label>Descontinuado</mat-label>
-                  <input matInput placeholder="Escribe si esta descontinuado" formControlName="discontinued" autocomplete="off">
-                </mat-form-field>
-              </div>
+              <mat-label style="float: left; ">Descontinuado</mat-label>
+              <br>
+              <mat-radio-group  formControlName="discontinued">
+                <mat-radio-button value="true" style="margin-right: 16px;">Sí</mat-radio-button>
+                <mat-radio-button value="false">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
       
             <div id="buttons">
               <button mat-raised-button color="primary" style="margin:20px" type="submit">Agregar</button>

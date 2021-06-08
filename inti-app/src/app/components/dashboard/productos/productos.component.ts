@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
 import { tap, take } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { EditPersonalService } from 'src/app/services/configEdit/editPersonal.service';
+import { DetailProductoComponent } from './detail-producto/detail-producto.component';
 
 @Component({
   selector: 'app-productos',
@@ -45,6 +46,7 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   cargarProducto(){
     this.listProduct$ = this.productoService.getProductoService().pipe(tap(response => {
       this.dataSource = new MatTableDataSource(response);
+      console.log(response);
       console.log(this.dataSource);
       setTimeout(() => {
         this.dataSource.paginator = this.paginator;
@@ -106,15 +108,15 @@ export class ProductosComponent implements OnInit, AfterViewInit {
     this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => this.cargarProducto());
   }
 
-  // detailPersonal(id:any, i:any){
-  //   //console.log(id);
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.disableClose = false;
-  //   dialogConfig.autoFocus = true;
-  //   dialogConfig.width = "28%";
-  //   this._serviceEdit.set(i)
-  //   this.dialog.open(DetailPersonalComponent, dialogConfig);
-  // }
+  detailProducto(id:any, i:any){
+    //console.log(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "30%";
+    this._serviceEdit.set(i)
+    this.dialog.open(DetailProductoComponent, dialogConfig);
+  }
 
   onSearchClear(){
     this.searchKey = "";

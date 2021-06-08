@@ -1,5 +1,5 @@
 
-<mat-sidenav-container autosize>
+<mat-sidenav-container autosize >
     <mat-sidenav #sidenav mode="side" opened="true">
         <mat-nav-list>
             
@@ -23,7 +23,7 @@
                 <mat-icon mat-list-icon>people</mat-icon>
                 <span *ngIf="isExpanded">Personal</span>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item id="logout">
                 <button routerLink="/logout" mat-icon-button aria-label="Example icon button with a home icon">
                     <mat-icon>logout</mat-icon>
                 </button>

@@ -1,27 +1,27 @@
+import { SupplierService } from './../../../../services/supplier.service';
 import { ProductosComponent } from './../productos.component';
 import { ProductoService } from './../../../../services/producto.service';
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Empleado } from 'src/app/interfaces/empleado';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { take, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-new-producto',
   templateUrl: './new-producto.component.html',
   styleUrls: ['./new-producto.component.css']
 })
-export class NewProductoComponent implements OnInit {
+export class NewProductoComponent implements OnInit, AfterViewInit {
 
   productoForm: FormGroup;
   dataSource: any;
+  suppliersList: any [] = [];
+  categoryList: any [] = [];
+  supplierSelected: String | undefined;
   pageLength = 0;
   listPersonal$: Observable<any> = of(null);
 
@@ -29,12 +29,11 @@ export class NewProductoComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private productoService:ProductoService,
-    private ngZone: NgZone,
-    private router: Router,
     public dialogRef: MatDialogRef<ProductosComponent>,
     private _snackBar: MatSnackBar,
     public formBuilder: FormBuilder,
-    private dialog: MatDialog) {
+    private supplierService: SupplierService,
+    private categoryService: CategoryService) {
       this.productoForm = this.formBuilder.group({
         title: ['', Validators.required],
         id_suplier: ['', Validators.required],
@@ -44,9 +43,14 @@ export class NewProductoComponent implements OnInit {
         stock: ['',Validators.required],
         discontinued: ['',Validators.required]
       });
-     }
+    }
 
   ngOnInit(): void {
+    this.addSupplierToList();
+    this.addCategoryToList();
+  }
+
+  ngAfterViewInit(): void {
   }
 
   addNewProducto():any{
@@ -62,6 +66,18 @@ export class NewProductoComponent implements OnInit {
       verticalPosition: 'bottom'
     });
     this.dialogRef.close();
+  }
+
+  addSupplierToList():any{
+    this.supplierService.getSupplierService().subscribe((res:any) => {
+      this.suppliersList = res;
+    })
+  }
+
+  addCategoryToList():any{
+    this.categoryService.getCategoryService().subscribe((res:any) => {
+      this.categoryList = res;
+    })
   }
 
   cancel(){

@@ -1,6 +1,17 @@
-mat-sidenav-container{
+.mat-sidenav-container{
     height: 100%;
-    transition: transform 0.3s, width 0.3s;
+    transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+}
+
+.mat-sidenav{
+    transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+}
+
+.mat-sidenav-list{
+    transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
 }
 
 .chevron-button{
@@ -14,6 +25,10 @@ mat-sidenav-container{
     transform: rotate(180deg);
 }
 
-.sidenav-button{
-
+#logout{
+    position: absolute;
+    bottom: 0;
 }
+
+
+

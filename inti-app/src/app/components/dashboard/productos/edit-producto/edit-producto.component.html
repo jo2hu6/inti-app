@@ -18,15 +18,24 @@
             <div>
               <mat-form-field style="width: 100%;">
                 <mat-label>Proveedor</mat-label>
-                <input matInput placeholder="Escribe el proveedor" formControlName="id_suplier" autocomplete="off">
+                <mat-select formControlName="id_suplier">
+                  <mat-option *ngFor="let i of suppliersList"  value="{{i.id}}">
+                    {{i.tittle}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
 
             <div>
-                <mat-form-field style="width: 100%;">
-                  <mat-label>Categoría</mat-label>
-                  <input matInput placeholder="Escribe la categoría" formControlName="id_category" autocomplete="off">
-                </mat-form-field>
+              <mat-form-field style="width: 100%;">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="id_category">
+                  <mat-option *ngFor="let i of categoryList" value={{i.id}}>
+                    {{i.tittle}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
             </div>
       
             <div>

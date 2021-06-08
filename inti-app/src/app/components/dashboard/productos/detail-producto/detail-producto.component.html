@@ -1,0 +1,43 @@
+<form [formGroup]="productoForm" *ngFor="let i of productoList" action="">
+
+    <mat-toolbar>
+        <span class="example-spacer"></span>
+        <h2><strong>Detalle Producto</strong></h2>
+        <span class="example-spacer"></span>
+    </mat-toolbar>
+
+    <mat-list>
+
+        <span>Nombre:</span>
+        <h3 class="interDetail"> {{i.tittle}} </h3>
+        <mat-divider ></mat-divider>
+
+        <span>Proveedor:</span>
+        <h3 class="interDetail"> {{i.id_supplier}} </h3>
+        <mat-divider></mat-divider>
+
+        <span>Categoría:</span>
+        <h3 class="interDetail"> {{i.id_category}} </h3>
+        <mat-divider></mat-divider>
+
+        <span>Cantidad por unidad:</span>
+        <h3 class="interDetail"> {{i.quantity_per_unit}} </h3>
+        <mat-divider></mat-divider>
+        
+        <span>Precio unitario:</span>
+        <h3 class="interDetail"> {{i.unite_price}} </h3>
+        <mat-divider></mat-divider>
+
+        <span>Stock:</span>
+        <h3 class="interDetail"> {{i.stock}} </h3>
+        <mat-divider></mat-divider>
+
+        <span>Descontinuado:</span>
+        <h3 class="interDetail"> {{i.discontinued === true ? 'Sí' : 'No'}} </h3>
+    </mat-list>
+
+    <div class="btn">
+        <button mat-raised-button color="primary" (click)="cancel()">Aceptar</button>
+    </div>
+
+</form>
