@@ -10,7 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 
 export class PersonalService {
 
-  REST_API: string = 'http://localhost:3000/api';
+  REST_API: string = 'http://152.67.46.207:3000/api';
   httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
